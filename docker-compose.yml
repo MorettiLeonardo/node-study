@@ -1,10 +1,12 @@
+version: "3.9"
+
 services:
   mysql:
     image: mysql:8
     container_name: mysql-api-node
     restart: always
     ports:
-      - "3307:3306" # host:container
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: api-node
@@ -13,5 +15,16 @@ services:
     volumes:
       - mysql-api-node-data:/var/lib/mysql
 
+  redis:
+    image: redis:latest
+    container_name: redis-api-node
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+
 volumes:
   mysql-api-node-data:
+  redis-data:
