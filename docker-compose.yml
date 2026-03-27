@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-api-node
+    restart: always
+    ports:
+      - "3307:3306" # host:container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api-node
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - mysql-api-node-data:/var/lib/mysql
+
+volumes:
+  mysql-api-node-data:
