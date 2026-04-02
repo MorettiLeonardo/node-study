@@ -9,8 +9,6 @@ class OrderRepository {
         const user = await prisma.user.findUnique({
             where: { id: userId }
         });
-        console.log(userId)
-        console.log(items)
 
         if (!user) {
             throw new Error("User not found");

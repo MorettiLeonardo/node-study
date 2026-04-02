@@ -10,7 +10,6 @@ export class UserController {
     ) {
         try {
             const user = await createUserHandler.execute(req.body)
-            console.log(user)
 
             return res.status(201).json(user)
         } catch (error) {
