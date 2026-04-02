@@ -18,7 +18,7 @@ interface CreateOrderResponse {
     order: Order;
 }
 
-export class CreateOrderHandler {
+class CreateOrderHandler {
     async execute(request: CreateOrderRequest): Promise<CreateOrderResponse> {
         const parsed = createOrderSchema.safeParse(request);
 
@@ -33,3 +33,7 @@ export class CreateOrderHandler {
         return { order };
     }
 }
+
+var createOrderHandler = new CreateOrderHandler();
+
+export { createOrderHandler }

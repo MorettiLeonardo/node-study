@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
-    "worker": "npx tsx src/workers/worker.ts"
+    "worker": "npx tsx src/jobs",
+    "queue": "npx tsx src/infrastructure/messaging/queue/queue.ts"
   },
   "keywords": [],
   "author": "",

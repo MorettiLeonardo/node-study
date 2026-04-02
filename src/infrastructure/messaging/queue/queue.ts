@@ -1,10 +1,5 @@
 import { Queue } from "bullmq"
-import IORedis from "ioredis"
+import { mailRegistrationJob } from "src/jobs/MailRegistration"
+import { redisConnection } from "src/config/redistConnection"
 
-const connection = new IORedis({
-    host: "localhost",
-    port: 6379,
-    maxRetriesPerRequest: null,
-})
-
-export const queue = new Queue("fila", { connection })
+export const queue = new Queue(mailRegistrationJob.name, { connection: redisConnection })
