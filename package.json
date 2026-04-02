@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "tsx watch src/server.ts",
-    "dev:queue": "npx tsx src/infrastructure/messaging/queue/queue.ts",
+    "dev:worker-mail": "tsx watch src/jobs/mail.worker.ts",
     "dev:prisma-studio": "npx prisma studio"
   },
   "keywords": [],

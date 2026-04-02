@@ -21,7 +21,7 @@ export class LoginHandler {
         const accessToken = jwt.sign(
             {
                 sub: user.id,
-                role: user.role // 🔥 ESSENCIAL
+                role: user.role
             },
             process.env.JWT_SECRET!,
             { expiresIn: "15m" }
@@ -30,7 +30,7 @@ export class LoginHandler {
         const refreshToken = jwt.sign(
             {
                 sub: user.id,
-                role: user.role // 🔥 ESSENCIAL
+                role: user.role
             },
             process.env.JWT_REFRESH_SECRET!,
             { expiresIn: "7d" }
@@ -66,8 +66,6 @@ export class LoginHandler {
 
         return { accessToken, refreshToken }
     }
-
-
 }
 
 var loginHandler = new LoginHandler()

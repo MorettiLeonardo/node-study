@@ -2,7 +2,7 @@ import { Role } from "@prisma/client"
 import bcrypt from "bcrypt"
 import { User } from "src/domain/entities/user.entity"
 import { userRepository } from "src/infrastructure/database/repositories/user.repository"
-import { mailQueue } from "src/infrastructure/messaging/queue/queue"
+import { mailQueue } from "src/infrastructure/messaging/queue/mail.queue"
 import z from "zod"
 
 const createUserSchema = z.object({
@@ -46,11 +46,13 @@ export class CreateUserHandler {
 
         const createdUser = await userRepository.create(user)
 
-        await mailQueue.add("send-email", {
+        const mailData = {
             to: user.email,
-            subject: "Bem-vindo!",
-            text: "Sua conta foi criada 🚀",
-        })
+            subject: "Welcome to our platform!",
+            text: `Hello ${user.name}, welcome to our platform! Your account has been created successfully.`
+        }
+
+        await mailQueue.add("send-registration-email", mailData)
 
         return {
             id: createdUser.id!,

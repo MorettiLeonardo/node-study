@@ -14,12 +14,10 @@ class OrderRepository {
             throw new Error("User not found");
         }
 
-        // 🔒 validação básica
         if (!items || items.length === 0) {
             throw new Error("Order must have at least one item");
         }
 
-        // 🔍 busca produtos no banco
         const products = await prisma.product.findMany({
             where: {
                 id: {

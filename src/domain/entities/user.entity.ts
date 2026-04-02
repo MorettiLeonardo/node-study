@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client"
+
 interface UserProps {
     id?: string
     name: string
@@ -5,7 +7,7 @@ interface UserProps {
     password: string
     createdAt?: Date
     updatedAt?: Date
-    role: ERole
+    role: Role
 }
 
 export class User {
