@@ -8,6 +8,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "tsx watch src/server.ts",
     "dev:worker-mail": "tsx watch src/jobs/mail.worker.ts",
+    "dev:worker-order": "tsx watch src/jobs/order.worker.ts",
     "dev:prisma-studio": "npx prisma studio"
   },
   "keywords": [],
@@ -32,6 +33,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
     "@types/nodemailer": "^7.0.11",
+    "npm-run-all": "^4.1.5",
     "prisma": "^6.19.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",

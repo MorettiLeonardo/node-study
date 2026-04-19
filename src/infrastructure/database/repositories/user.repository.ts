@@ -1,4 +1,4 @@
-import { User } from 'src/domain/entities/user.entity'
+import { User } from '../../../domain/entities/user.entity'
 import prisma from '../prisma/prisma'
 
 class UserRepository {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { loginHandler } from 'src/application/handlers/auth/login.handler'
-import { refreshTokenHandler } from 'src/application/handlers/auth/refresh-token.handler'
+import { loginHandler } from '../../../application/handlers/auth/login.handler'
+import { refreshTokenHandler } from '../../../application/handlers/auth/refresh-token.handler'
 
 export class AuthController {
     async login(req: Request, res: Response) {

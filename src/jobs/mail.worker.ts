@@ -1,6 +1,6 @@
 import { Worker } from "bullmq"
-import { sendEmail } from "src/application/external-services/email.service"
-import { redisConnection } from "src/config/redistConnection"
+import { sendEmail } from "../application/external-services/email.service"
+import { redisConnection } from "../config/redistConnection"
 
 new Worker(
   "mail",
