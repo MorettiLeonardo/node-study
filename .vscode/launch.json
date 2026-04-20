@@ -1,0 +1,97 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug: api-gateway (tsx)",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--inspect-brk=9229",
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "apps/api-gateway/src/server.ts"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug: auth-service (tsx)",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--inspect-brk=9230",
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "apps/auth-service/src/server.ts"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug: catalog-service (tsx)",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--inspect-brk=9231",
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "apps/catalog-service/src/server.ts"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug: order-service (tsx)",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--inspect-brk=9232",
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "apps/order-service/src/server.ts"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug: notification-service worker (tsx)",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--inspect-brk=9233",
+        "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+        "apps/notification-service/src/server.ts"
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug: gateway + core services",
+      "configurations": [
+        "Debug: api-gateway (tsx)",
+        "Debug: auth-service (tsx)",
+        "Debug: catalog-service (tsx)",
+        "Debug: order-service (tsx)"
+      ],
+      "stopAll": true
+    }
+  ]
+}
