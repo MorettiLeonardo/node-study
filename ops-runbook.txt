@@ -1,0 +1,37 @@
+Service migration runbook
+========================
+
+Required environment variables
+------------------------------
+AUTH_DATABASE_URL
+CATALOG_DATABASE_URL
+ORDER_DATABASE_URL
+REDIS_HOST
+REDIS_PORT
+KAFKA_BROKERS
+KAFKA_CLIENT_ID
+KAFKA_ORDER_GROUP_ID
+JWT_SECRET
+JWT_REFRESH_SECRET
+EMAIL_USER
+EMAIL_PASS
+
+Recommended local defaults
+--------------------------
+AUTH_DATABASE_URL=mysql://user:user@localhost:3308/auth-db
+CATALOG_DATABASE_URL=mysql://user:user@localhost:3309/catalog-db
+ORDER_DATABASE_URL=mysql://user:user@localhost:3310/order-db
+KAFKA_BROKERS=localhost:29092
+KAFKA_CLIENT_ID=node-study-local
+KAFKA_ORDER_GROUP_ID=order-service-group
+
+Migration and startup order
+---------------------------
+1) Start infrastructure:
+   docker compose up -d mysql-auth mysql-catalog mysql-order redis kafka
+2) Apply service migrations:
+   npm run db:bootstrap:services
+3) Start services:
+   npm run dev
+4) Verify boundary checks and typing:
+   npm test
