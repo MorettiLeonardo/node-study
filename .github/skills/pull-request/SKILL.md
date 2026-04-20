@@ -22,8 +22,8 @@ git status
 ```
 
 **File count check:**
-Count the files changed. If the count exceeds **30 files**, stop and tell the user:
-> "This PR contains X files, which exceeds the 30-file limit. Please split it into smaller PRs grouped by scope before continuing."
+Count the files changed. If the count exceeds **3000 files**, stop and tell the user:
+> "This PR contains X files, which exceeds the 3000-file limit. Please split it into smaller PRs grouped by scope before continuing."
 
 Do not proceed until the user confirms a split or reduces scope.
 
@@ -183,7 +183,7 @@ After creation, output:
 
 - Never create PRs through the GitHub UI — always use `gh pr create`
 - Never use `--body-file .github/PULL_REQUEST_TEMPLATE.md` with the blank template
-- Never exceed 30 files without user confirmation
+- Never exceed 3000 files without user confirmation
 - Never modify the template structure — only fill the fields
 - The branch must not contain unrelated changes
 - Do not mix feature + unrelated fixes + refactor in the same PR
