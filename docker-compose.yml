@@ -1,19 +1,45 @@
-version: "3.9"
-
 services:
-  mysql:
+  mysql-auth:
     image: mysql:8
-    container_name: mysql-api-node
+    container_name: mysql-auth
     restart: always
     ports:
-      - "3307:3306"
+      - "3308:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: api-node
+      MYSQL_DATABASE: auth-db
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     volumes:
-      - mysql-api-node-data:/var/lib/mysql
+      - mysql-auth-data:/var/lib/mysql
+
+  mysql-catalog:
+    image: mysql:8
+    container_name: mysql-catalog
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: catalog-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - mysql-catalog-data:/var/lib/mysql
+
+  mysql-order:
+    image: mysql:8
+    container_name: mysql-order
+    restart: always
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - mysql-order-data:/var/lib/mysql
 
   redis:
     image: redis:latest
@@ -25,6 +51,141 @@ services:
       - redis-data:/data
     command: redis-server --appendonly yes
 
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,PLAINTEXT_HOST://:29092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    container_name: auth-service
+    restart: always
+    depends_on:
+      - mysql-auth
+      - redis
+      - kafka
+    environment:
+      SERVICE_SCRIPT: dev:auth
+      AUTH_SERVICE_PORT: 3001
+      AUTH_DATABASE_URL: mysql://user:user@mysql-auth:3306/auth-db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_CLIENT_ID: auth-service
+      JWT_SECRET: dev-jwt-secret
+      JWT_REFRESH_SECRET: dev-jwt-refresh-secret
+      EMAIL_USER: ""
+      EMAIL_PASS: ""
+    ports:
+      - "3001:3001"
+
+  catalog-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    container_name: catalog-service
+    restart: always
+    depends_on:
+      - mysql-catalog
+      - redis
+      - kafka
+    environment:
+      SERVICE_SCRIPT: dev:catalog
+      CATALOG_SERVICE_PORT: 3002
+      CATALOG_DATABASE_URL: mysql://user:user@mysql-catalog:3306/catalog-db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_CLIENT_ID: catalog-service
+      JWT_SECRET: dev-jwt-secret
+      JWT_REFRESH_SECRET: dev-jwt-refresh-secret
+    ports:
+      - "3002:3002"
+
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    container_name: order-service
+    restart: always
+    depends_on:
+      - mysql-order
+      - redis
+      - kafka
+    environment:
+      SERVICE_SCRIPT: dev:order
+      ORDER_SERVICE_PORT: 3003
+      ORDER_DATABASE_URL: mysql://user:user@mysql-order:3306/order-db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_CLIENT_ID: order-service
+      KAFKA_ORDER_GROUP_ID: order-service-group
+      JWT_SECRET: dev-jwt-secret
+      JWT_REFRESH_SECRET: dev-jwt-refresh-secret
+    ports:
+      - "3003:3003"
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    container_name: notification-service
+    restart: always
+    depends_on:
+      - redis
+      - kafka
+    environment:
+      SERVICE_SCRIPT: dev:notification
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_CLIENT_ID: notification-service
+      EMAIL_USER: ""
+      EMAIL_PASS: ""
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.service
+    container_name: api-gateway
+    restart: always
+    depends_on:
+      - auth-service
+      - catalog-service
+      - order-service
+      - kafka
+    environment:
+      SERVICE_SCRIPT: dev:gateway
+      PORT: 3000
+      AUTH_SERVICE_URL: http://auth-service:3001
+      CATALOG_SERVICE_URL: http://catalog-service:3002
+      ORDER_SERVICE_URL: http://order-service:3003
+    ports:
+      - "3000:3000"
+
 volumes:
-  mysql-api-node-data:
+  mysql-auth-data:
+  mysql-catalog-data:
+  mysql-order-data:
   redis-data:

@@ -2,12 +2,17 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "sourceMap": true
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@contracts/*": ["packages/contracts/src/*"],
+      "@shared/*": ["packages/shared/src/*"],
+      "@platform/*": ["packages/platform/src/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["apps/**/*.ts", "packages/**/*.ts", "prisma.config.ts"]
 }
