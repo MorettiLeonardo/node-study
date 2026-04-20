@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createProductHandler } from "src/application/handlers/product/create-product.handler";
+import { createProductHandler } from "../../../application/handlers/product/create-product.handler";
 
 class ProductController {
     async createProduct(req: Request, res: Response) {

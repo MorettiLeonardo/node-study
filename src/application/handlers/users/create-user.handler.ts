@@ -1,9 +1,9 @@
 import { Role } from "@prisma/client"
 import bcrypt from "bcrypt"
-import { User } from "src/domain/entities/user.entity"
-import { userRepository } from "src/infrastructure/database/repositories/user.repository"
-import { mailQueue } from "src/infrastructure/messaging/queue/mail.queue"
 import z from "zod"
+import { userRepository } from "../../../infrastructure/database/repositories/user.repository";
+import { User } from "../../../domain/entities/user.entity";
+import { mailQueue } from "../../../infrastructure/messaging/queues/mail.queue";
 
 const createUserSchema = z.object({
     name: z.string().min(1),

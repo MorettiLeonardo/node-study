@@ -1,6 +1,6 @@
 import { Role } from "@prisma/client"
-import { userRepository } from "src/infrastructure/database/repositories/user.repository"
 import z from "zod"
+import { userRepository } from "../../../infrastructure/database/repositories/user.repository"
 
 const updateUserSchema = z.object({
     name: z.string().min(3).max(255),

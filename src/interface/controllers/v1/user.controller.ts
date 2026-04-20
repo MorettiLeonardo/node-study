@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { createUserHandler } from 'src/application/handlers/users/create-user.handler'
-import { updateUserHandler } from 'src/application/handlers/users/update-user.handler'
+import { createUserHandler } from '../../../application/handlers/users/create-user.handler'
+import { updateUserHandler } from '../../../application/handlers/users/update-user.handler'
 
 export class UserController {
     async register(

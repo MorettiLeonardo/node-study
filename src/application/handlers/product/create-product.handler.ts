@@ -1,6 +1,6 @@
-import { Product } from "src/domain/entities/product.entity";
-import { productRepository } from "src/infrastructure/database/repositories/product.repository"
 import z from "zod";
+import { Product } from "../../../domain/entities/product.entity";
+import { productRepository } from "../../../infrastructure/database/repositories/product.repository";
 
 const createProductSchema = z.object({
     name: z.string().min(1),

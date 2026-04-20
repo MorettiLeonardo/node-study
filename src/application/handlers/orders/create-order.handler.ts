@@ -1,6 +1,5 @@
-import { Order } from "@prisma/client";
-import { orderRepository } from "src/infrastructure/database/repositories/order.repository";
 import { z } from "zod";
+import { orderQueue } from "../../../infrastructure/messaging/queues/orderQueue";
 
 const createOrderSchema = z.object({
     userId: z.string().uuid(),
@@ -15,7 +14,7 @@ const createOrderSchema = z.object({
 type CreateOrderRequest = z.infer<typeof createOrderSchema>;
 
 interface CreateOrderResponse {
-    order: Order;
+    message: string;
 }
 
 class CreateOrderHandler {
@@ -28,9 +27,14 @@ class CreateOrderHandler {
 
         const { userId, items } = parsed.data;
 
-        const order = await orderRepository.create(userId, items);
+        await orderQueue.add("create-order", {
+            userId,
+            items
+        });
 
-        return { order };
+        return {
+            message: "Order created."
+        };
     }
 }
 

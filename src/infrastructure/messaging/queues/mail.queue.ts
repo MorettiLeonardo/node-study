@@ -1,5 +1,5 @@
 import { Queue } from "bullmq"
-import { redisConnection } from "src/config/redistConnection"
+import { redisConnection } from "../../../config/redistConnection"
 
 export const mailQueue = new Queue("mail", {
   connection: redisConnection

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createOrderHandler } from "src/application/handlers/orders/create-order.handler";
+import { createOrderHandler } from "../../../application/handlers/orders/create-order.handler";
 
 export class OrderController {
     async createOrderAsync(req: Request, res: Response) {

@@ -1,0 +1,1 @@
+{"version":3,"file":"orderQueue.js","sourceRoot":"","sources":["../../../../src/infrastructure/messaging/queues/orderQueue.ts"],"names":[],"mappings":";;;AAAA,mCAA8B;AAC9B,kEAA6D;AAEhD,QAAA,UAAU,GAAG,IAAI,cAAK,CAAC,OAAO,EAAE;IAC3C,UAAU,EAAE,kCAAe;CAC5B,CAAC,CAAA"}

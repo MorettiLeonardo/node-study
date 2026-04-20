@@ -1,6 +1,6 @@
 import { Product as PrismaProduct } from "@prisma/client";
-import { Product } from "src/domain/entities/product.entity";
 import prisma from "../prisma/prisma";
+import { Product } from "../../../domain/entities/product.entity";
 
 class ProductRepository {
     private toProductEntity(data: PrismaProduct): Product {
