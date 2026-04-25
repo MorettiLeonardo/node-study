@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../../../../prisma/generated/order-client";
 import orderPrisma from "../prisma/order.prisma";
 
 type UserPayload = {

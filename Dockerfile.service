@@ -7,6 +7,10 @@ RUN npm ci
 
 COPY . .
 
+# Prisma Client is required at runtime for services that import @prisma/client.
+# Generate all service clients during build so containers start cleanly.
+RUN npm run prisma:generate:all
+
 ENV SERVICE_SCRIPT=dev:gateway
 
 CMD ["sh", "-c", "npm run ${SERVICE_SCRIPT}"]

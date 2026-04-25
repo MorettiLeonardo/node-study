@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../../prisma/generated/catalog-client";
 
 function requireEnv(name: string): string {
   const value = process.env[name];
