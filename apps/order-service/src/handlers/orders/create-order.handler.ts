@@ -1,5 +1,5 @@
 import { Order } from "@prisma/client";
-import { orderRepository } from "@platform/database/repositories/order.repository";
+import { orderRepository } from "../../database/repositories/order.repository";
 import { z } from "zod";
 
 const createOrderSchema = z.object({

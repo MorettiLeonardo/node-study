@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "test": "npm run typecheck && npm run check:boundaries",

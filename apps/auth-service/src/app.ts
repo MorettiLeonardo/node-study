@@ -1,9 +1,9 @@
 import cors from "cors";
 import express from "express";
 import { errorMiddleware } from "./middleware/error.middleware";
+import { loggingMiddleware, requestIdMiddleware } from "./middleware/request-id.middleware";
 import { authRoutes } from "./routes/auth.routes";
 import { userRoutes } from "./routes/user.routes";
-import { loggingMiddleware, requestIdMiddleware } from "@shared/index";
 
 export const app = express();
 

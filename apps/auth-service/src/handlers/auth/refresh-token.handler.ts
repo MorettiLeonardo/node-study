@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { tokenRepository } from "@platform/database/repositories/token.repository";
+import { tokenRepository } from "../../database/repositories/token.repository";
 import z from "zod";
 
 const RefreshTokenRequestSchema = z.object({

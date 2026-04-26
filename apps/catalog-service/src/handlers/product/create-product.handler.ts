@@ -1,6 +1,6 @@
-import { productRepository } from "@platform/database/repositories/product.repository";
-import { publishEvent } from "@platform/messaging/kafka/client";
-import { Product } from "@shared/domain/entities/product.entity";
+import { productRepository } from "../../database/repositories/product.repository";
+import { Product } from "../../domain/entities/product.entity";
+import { publishEvent } from "../../messaging/kafka/client";
 import z from "zod";
 
 const createProductSchema = z.object({

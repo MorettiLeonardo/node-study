@@ -1,6 +1,6 @@
 import { Role } from "@prisma/client";
-import { publishEvent } from "@platform/messaging/kafka/client";
-import { userRepository } from "@platform/database/repositories/user.repository";
+import { userRepository } from "../../database/repositories/user.repository";
+import { publishEvent } from "../../messaging/kafka/client";
 import z from "zod";
 
 const updateUserSchema = z.object({

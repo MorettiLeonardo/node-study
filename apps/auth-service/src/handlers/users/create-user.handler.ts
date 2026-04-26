@@ -1,9 +1,9 @@
 import { Role } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { publishEvent } from "@platform/messaging/kafka/client";
-import { mailQueue } from "@platform/messaging/queues/mail.queue";
-import { userRepository } from "@platform/database/repositories/user.repository";
-import { User } from "@shared/domain/entities/user.entity";
+import { userRepository } from "../../database/repositories/user.repository";
+import { User } from "../../domain/entities/user.entity";
+import { publishEvent } from "../../messaging/kafka/client";
+import { mailQueue } from "../../messaging/queues/mail.queue";
 import z from "zod";
 
 const createUserSchema = z.object({

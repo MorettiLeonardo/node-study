@@ -1,8 +1,8 @@
 import cors from "cors";
 import express from "express";
 import { errorMiddleware } from "./middleware/error.middleware";
+import { loggingMiddleware, requestIdMiddleware } from "./middleware/request-id.middleware";
 import { orderRoutes } from "./routes/order.routes";
-import { loggingMiddleware, requestIdMiddleware } from "@shared/index";
 
 export const app = express();
 

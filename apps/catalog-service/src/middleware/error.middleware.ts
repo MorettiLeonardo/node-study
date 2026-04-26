@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ConflictError } from "@shared/domain/errors/domain.error";
+import { ConflictError } from "../domain/errors/domain.error";
 import { ZodError } from "zod";
 
 export function errorMiddleware(

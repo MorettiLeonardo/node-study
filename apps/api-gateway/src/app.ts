@@ -1,7 +1,8 @@
 import cors from "cors";
 import express from "express";
-import { ServiceRoutes } from "@contracts/index";
-import { loggingMiddleware, proxyTo, requestIdMiddleware } from "@shared/index";
+import { ServiceRoutes } from "./contracts/service-routes";
+import { loggingMiddleware, requestIdMiddleware } from "./middleware/request-id.middleware";
+import { proxyTo } from "./middleware/proxy.middleware";
 
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3001";
 const CATALOG_SERVICE_URL =

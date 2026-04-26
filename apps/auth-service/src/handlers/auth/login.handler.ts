@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { tokenRepository } from "@platform/database/repositories/token.repository";
-import { userRepository } from "@platform/database/repositories/user.repository";
+import { tokenRepository } from "../../database/repositories/token.repository";
+import { userRepository } from "../../database/repositories/user.repository";
 import z from "zod";
 
 const LoginRequestSchema = z.object({

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { createUserHandler } from "../handlers/users/create-user.handler";
 import { getUserByIdHandler } from "../handlers/users/get-user-by-id.handler";
 import { updateUserHandler } from "../handlers/users/update-user.handler";
+import { createUserHandler } from "../handlers/users/create-user.handler";
 
 export class UserController {
   async register(req: Request, res: Response, next: NextFunction) {

@@ -1,4 +1,4 @@
-import { productRepository } from "@platform/database/repositories/product.repository";
+import { productRepository } from "../../database/repositories/product.repository";
 import z from "zod";
 
 const getProductsByIdsSchema = z.object({

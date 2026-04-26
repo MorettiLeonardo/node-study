@@ -1,4 +1,4 @@
-import { redisConnection } from "@platform/config/redisConnection";
+import { redisConnection } from "../infra/redisConnection";
 import { Worker } from "bullmq";
 import { sendEmail } from "../services/email.service";
 

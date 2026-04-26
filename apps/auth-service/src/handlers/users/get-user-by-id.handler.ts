@@ -1,4 +1,4 @@
-import { userRepository } from "@platform/database/repositories/user.repository";
+import { userRepository } from "../../database/repositories/user.repository";
 
 type GetUserByIdResponse = {
   id: string;

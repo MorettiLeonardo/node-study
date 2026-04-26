@@ -7,12 +7,6 @@
     "strict": true,
     "esModuleInterop": true,
     "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
-    "paths": {
-      "@contracts/*": ["packages/contracts/src/*"],
-      "@shared/*": ["packages/shared/src/*"],
-      "@platform/*": ["packages/platform/src/*"]
-    }
   },
-  "include": ["apps/**/*.ts", "packages/**/*.ts", "prisma.config.ts"]
+  "include": ["apps/**/*.ts", "prisma.config.ts"]
 }

@@ -1,5 +1,5 @@
-import { createConsumer, ensureTopics } from "@platform/messaging/kafka/client";
-import { orderRepository } from "@platform/database/repositories/order.repository";
+import { orderRepository } from "../database/repositories/order.repository";
+import { createConsumer, ensureTopics } from "../messaging/kafka/client";
 
 type UserEventPayload = {
   id: string;
